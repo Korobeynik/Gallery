@@ -1,23 +1,26 @@
 <script setup>
-import { ref } from "vue";
-import { usePhotoStore } from "@/stores/app";
-import { onMounted } from "vue";
-const photoStore = usePhotoStore();
-const { deletePhoto } = photoStore;
-
 const photo = defineProps({
 	item: {
 		type: Object,
 		required: true,
 	},
+	deletePhoto: {
+		type: Function,
+		required: true,
+	},
 });
+
+const handleDelete = () => {
+	photo.deletePhoto(photo.item.id);
+};
 </script>
 <template>
 	<v-col
 		class="mb-0 item-photo"
+		cols="12"
+		xs="12"
+		sm="6"
 		md="3"
-		sm="2"
-		xs="1"
 		:style="{ backgroundImage: `url(${photo.item.url})` }"
 	>
 		<router-link class="link-item" :to="`/photos/${photo.item.id}`">
@@ -31,7 +34,7 @@ const photo = defineProps({
 				<v-icon icon="mdi-pencil"></v-icon>
 			</v-btn>
 			<v-btn
-				@click="deletePhoto(photo.item.id)"
+				@click="handleDelete(photo.item.id)"
 				density="comfortable"
 				icon="$delete"
 			></v-btn>

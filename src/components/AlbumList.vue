@@ -1,25 +1,16 @@
-<script>
+<script setup>
 import { ref } from "vue";
 import { usePhotoStore } from "@/stores/app";
 
-export default {
-	setup() {
-		const photoStore = usePhotoStore();
-		const newAlbum = ref("");
+const photoStore = usePhotoStore();
+const newAlbum = ref("");
+const albums = ref(photoStore.albums);
 
-		const addNewAlbum = () => {
-			if (newAlbum.value.trim()) {
-				photoStore.addAlbum(newAlbum.value.trim());
-				newAlbum.value = "";
-			}
-		};
-
-		return {
-			albums: photoStore.albums,
-			newAlbum,
-			addNewAlbum,
-		};
-	},
+const addNewAlbum = () => {
+	if (newAlbum.value.trim()) {
+		photoStore.addAlbum(newAlbum.value.trim());
+		newAlbum.value = "";
+	}
 };
 </script>
 <template>
@@ -31,9 +22,14 @@ export default {
 			}}</v-list-item>
 		</v-list-item>
 
-		<form @submit.prevent="addNewAlbum">
+		<form>
 			<v-text-field v-model="newAlbum" label="Add new album" />
-			<v-btn color="#5865f2" rounded="xl" size="small" block
+			<v-btn
+				@click="addNewAlbum"
+				color="#5865f2"
+				rounded="xl"
+				size="small"
+				block
 				>Add New Album</v-btn
 			>
 		</form>

@@ -39,7 +39,7 @@ onMounted(() => {
 
 const handleSubmit = () => {
 	if (isEditMode.value) {
-		photoStore.updatePhoto(editablePhoto.value);
+		photoStore.updatedPhoto(editablePhoto.value.id, editablePhoto.value);
 	} else {
 		photoStore.addPhoto(editablePhoto.value);
 	}
@@ -49,12 +49,12 @@ const handleSubmit = () => {
 
 <template>
 	<v-row>
-		<v-col
-			><h1>{{ isEditMode ? "Edit Photo" : "Add New Photo" }}</h1></v-col
-		>
+		<v-col cols="12" xs="12" sm="6">
+			<h1>{{ isEditMode ? "Edit Photo" : "Add New Photo" }}</h1>
+		</v-col>
 	</v-row>
 	<v-row>
-		<v-col>
+		<v-col cols="12" xs="12" sm="6">
 			<form>
 				<v-text-field
 					v-model="editablePhoto.id"
@@ -93,7 +93,7 @@ const handleSubmit = () => {
 				</div>
 			</form>
 		</v-col>
-		<v-col>
+		<v-col xs="12">
 			<PreviewPhoto v-model="editablePhoto.url"></PreviewPhoto>
 		</v-col>
 	</v-row>

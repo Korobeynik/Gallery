@@ -27,6 +27,10 @@ const deleteAlbum = (albumName) => {
 	photoStore.savePhotosToLocalStorage();
 };
 
+const deletePhoto = (photoId) => {
+	photoStore.deletePhoto(photoId);
+};
+
 onMounted(() => {
 	photoStore.fetchPhotos();
 });
@@ -47,7 +51,12 @@ onMounted(() => {
 						@click="deleteAlbum(albumName)"
 					></v-btn>
 					<v-expansion-panel-title>
-						{{ albumName }} Album
+						<h3 class="mr-5">{{ albumName }} Album</h3>
+						<span
+							>{{ albumPhotos.length }} -
+
+							{{ albumPhotos.length == 1 ? `photo` : `photos` }}
+						</span>
 					</v-expansion-panel-title>
 					<v-expansion-panel-text>
 						<v-row class="mb-2" no-gutters>
@@ -55,6 +64,7 @@ onMounted(() => {
 								v-for="item in albumPhotos"
 								:key="item.id"
 								:item="item"
+								:deletePhoto="deletePhoto"
 							></item-photo>
 						</v-row>
 					</v-expansion-panel-text>

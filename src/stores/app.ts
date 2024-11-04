@@ -29,25 +29,33 @@ export const usePhotoStore = defineStore('photoStore', {
         this.loading = false;
       }
     },
-  
-    async updatePhoto(updatedPhoto) {
+    async updatedPhoto(photoId, updatedData) {
       try {
-        await axios.put(`${BASE_URL}/${updatedPhoto.id}`, updatedPhoto);
-        const index = this.photos.findIndex((photo) => photo.id === updatedPhoto.id);
+        const response = await axios.put(`${BASE_URL}/${photoId}`, updatedData);
+        const index = this.photos.findIndex(photo => photo.id === photoId);
         if (index !== -1) {
-          this.photos[index] = updatedPhoto;
+          this.photos[index] = { ...this.photos[index], ...response.data };
         }
       } catch (error) {
-        console.error("Error update photo:", error);
+        console.error("Error update:", error);
       }
-    },
-  
+    },  
     async addPhoto(newPhoto) {
       try {
         const response = await axios.post(BASE_URL, newPhoto);
         this.photos.push(response.data);
       } catch (error) {
         console.error("Error", error);
+      }
+    },
+
+    async deletePhoto(photoId) {
+      try {
+        await axios.delete(`${BASE_URL}/${photoId}`);
+        this.photos = this.photos.filter(photo => photo.id !== photoId);
+        //this.savePhotosToLocalStorage();
+      } catch (error) {
+        console.error("Error deleted", error);
       }
     },
   

@@ -4,6 +4,7 @@ import { BASE_URL } from "@/constans/api";
 import axios from "axios";
 import { usePhotoStore } from "@/stores/app";
 import ItemPhoto from "@/components/ItemPhoto.vue";
+import PhotoSearch from "@/components/PhotoSearch.vue";
 
 let opened = ref(0);
 const photoStore = usePhotoStore();
@@ -38,6 +39,7 @@ onMounted(() => {
 
 <template>
 	<v-container align="start">
+		<PhotoSearch />
 		<v-expansion-panels>
 			<v-expansion-panel
 				v-for="(albumPhotos, albumName) in groupedPhotos"

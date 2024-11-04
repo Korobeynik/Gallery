@@ -11,9 +11,11 @@ declare module 'vue' {
     Form: typeof import('./components/Form.vue')['default']
     ItemPhoto: typeof import('./components/ItemPhoto.vue')['default']
     ItemPhotoDetail: typeof import('./components/ItemPhotoDetail.vue')['default']
+    PhotoSearch: typeof import('./components/PhotoSearch.vue')['default']
     PreviewPhoto: typeof import('./components/PreviewPhoto.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Search: typeof import('./components/Search.vue')['default']
     TheMain: typeof import('./components/TheMain.vue')['default']
     TheNav: typeof import('./components/TheNav.vue')['default']
   }

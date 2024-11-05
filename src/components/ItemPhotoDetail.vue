@@ -1,6 +1,6 @@
-<script setup>
+<script setup lang="ts">
 import PreviewPhoto from "@/components/PreviewPhoto.vue";
-import { reactive, ref, computed, onMounted } from "vue";
+import { ref, computed, onMounted } from "vue";
 import { usePhotoStore } from "@/stores/app";
 
 const photoStore = usePhotoStore();
@@ -25,7 +25,7 @@ const disabledButton = computed(() => {
 });
 
 const clearForm = () => {
-	editablePhoto.value.id = "";
+	editablePhoto.value.id = null;
 	editablePhoto.value.album = "";
 	editablePhoto.value.description = "";
 	editablePhoto.value.url = "";
@@ -49,8 +49,9 @@ const handleSubmit = () => {
 
 <template>
 	<v-row>
-		<v-col cols="12" xs="12" sm="6">
+		<v-col cols="12" xs="12" sm="6" class="d-flex justify-space-between">
 			<h1>{{ isEditMode ? "Edit Photo" : "Add New Photo" }}</h1>
+			<v-btn :to="`/`" icon="mdi-arrow-left"></v-btn>
 		</v-col>
 	</v-row>
 	<v-row>

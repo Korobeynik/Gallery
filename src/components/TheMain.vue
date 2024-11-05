@@ -1,15 +1,10 @@
-<script setup>
-import { ref, onMounted, reactive, computed } from "vue";
-import { BASE_URL } from "@/constans/api";
-import axios from "axios";
+<script setup lang="ts">
+import { onMounted, computed } from "vue";
 import { usePhotoStore } from "@/stores/app";
 import ItemPhoto from "@/components/ItemPhoto.vue";
 import PhotoSearch from "@/components/PhotoSearch.vue";
 
-let opened = ref(0);
 const photoStore = usePhotoStore();
-
-const photos = ref(photoStore.photos);
 
 const groupedPhotos = computed(() => {
 	return photoStore.photos.reduce((groups, photo) => {
@@ -79,7 +74,7 @@ onMounted(() => {
 <style lang="scss">
 .v-list-item__prepend {
 	&:hover {
-		cursor: poiner;
+		cursor: pointer;
 	}
 }
 .accordion {
